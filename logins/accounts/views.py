@@ -66,6 +66,8 @@ def logins(request):
 @never_cache
 @login_required(login_url='login')
 def home(request):
+    if request.user.is_staff:
+        return redirect('admin')
     
     user=request.user
     return render(request,'home.html',{'name':user})
